@@ -1,0 +1,21 @@
+{
+    "name": "haque/cybersource-wrapper",
+    "description": "This is a simple cybersource payment gateway wrapper for latavel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Incevio Team",
+            "email": "help@incevio.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "cybersource/rest-client-php": "0.0.13",
+        "firebase/php-jwt": "5.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Haque\\Cybersource\\": "src/"
+        }
+    }
+}
