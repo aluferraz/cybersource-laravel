@@ -32,7 +32,7 @@ class Configuration
         //creating merchant config object
 	function merchantConfigObject()
 	{     
-		$config = new \CyberSource\Authentication\Core\MerchantConfiguration;
+		$config = new \Haque\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration;
                 if(is_bool($this->enableLog))
 		      $confiData = $config->setDebug($this->enableLog);
 

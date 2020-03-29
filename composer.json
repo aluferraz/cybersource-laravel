@@ -1,6 +1,6 @@
 {
     "name": "haque/cybersource-wrapper",
-    "description": "This is a simple cybersource payment gateway wrapper for latavel",
+    "description": "This is a simple cybersource wrapper",
     "license": "MIT",
     "authors": [
         {
@@ -10,12 +10,35 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "cybersource/rest-client-php": "0.0.13",
-        "firebase/php-jwt": "5.0.0"
+        "firebase/php-jwt": "5.0.0",
+        "illuminate/support": "^7"
     },
     "autoload": {
         "psr-4": {
             "Haque\\Cybersource\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Haque\\Cybersource\\Providers\\CybersourceServiceProvider"
+            ],
+            "aliases": {
+                "CybersourcePayments": "Haque\\Cybersource\\Facades\\CybersourcePaymentsFacade"
+            }
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover",
+            "php artisan vendor:publish --tag=cybersource-config-file --force"
+        ],
+        "post-install-cmd": [
+              "php artisan vendor:publish --tag=cybersource-config-file --force"
+        ],
+        "post-update-cmd": [
+              "php artisan vendor:publish --tag=cybersource-config-file --force"
+        ]
     }
 }
