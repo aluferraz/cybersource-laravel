@@ -1,6 +1,6 @@
 <?php
 
-namespace Haque\Cybersource\CybersourceSDK\Utilities\Flex;
+namespace Incevio\Cybersource\CybersourceSDK\Utilities\Flex;
 
 class TokenVerification
 {

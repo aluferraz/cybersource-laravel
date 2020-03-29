@@ -2,14 +2,14 @@
 /*
 *Purpose: Merchant Config contains credentials and8 keys for Authentication and API Information
 */
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Core;
-use Haque\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
-use Haque\Cybersource\CybersourceSDK\Authentication\Core\AuthException as AuthException;
-use Haque\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Core;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Core\AuthException as AuthException;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
 
 class MerchantConfiguration
 {
-  
+
     private static $defaultMerchantConfiguration;
     private static $logger = null;
 
@@ -166,7 +166,7 @@ class MerchantConfiguration
         }
     }
 
-    
+
 
     /**
      * Sets the access token for OAuth
@@ -204,17 +204,17 @@ class MerchantConfiguration
         if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::RUNENVIRONMENT))
         {
             $this->host = GlobalParameter::SANDBOXURL;
-            
-        } 
-        else if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::RUNPRODENVIRONMENT)) 
+
+        }
+        else if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::RUNPRODENVIRONMENT))
         {
            $this->host = GlobalParameter::PRODUCTIONURL;
         }
-        else if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::BOARUNENVIRONMENT)) 
+        else if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::BOARUNENVIRONMENT))
         {
            $this->host = GlobalParameter::BOASANDBOXURL;
         }
-        else if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::BOARUNPRODENVIRONMENT)) 
+        else if(strtoupper($this->runEnvironment) == strtoupper(GlobalParameter::BOARUNPRODENVIRONMENT))
         {
            $this->host = GlobalParameter::BOAPRODUCTIONURL;
         }
@@ -244,13 +244,13 @@ class MerchantConfiguration
     public function setSolutionId($solutionId)
     {
         $this->solutionId = $solutionId;
-        
+
         return $this;
     }
 
     /**
      * Gets the Solution ID
-     * @return string 
+     * @return string
      */
     public function getSolutionId()
     {
@@ -490,7 +490,7 @@ class MerchantConfiguration
         return $this->host;
     }
 
-    
+
 
     /**
      * Sets the HTTP Proxy Host
@@ -538,7 +538,7 @@ class MerchantConfiguration
         return $this->proxyPort;
     }
 
-    
+
     /**
      * Sets debug flag
      *
@@ -565,7 +565,7 @@ class MerchantConfiguration
     /**
      * Sets logSize
      *
-     * @param string $logSize 
+     * @param string $logSize
      *
      * @return $this
      */
@@ -576,7 +576,7 @@ class MerchantConfiguration
     }
 
     /**
-     * Gets the logSize 
+     * Gets the logSize
      *
      * @return string
      */
@@ -608,7 +608,7 @@ class MerchantConfiguration
         return $this->debugFile;
     }
 
-    
+
     /**
      * Gets the default MerchantConfiguration instance
      *
@@ -642,11 +642,11 @@ class MerchantConfiguration
      */
     public static function toDebugReport()
     {
-        $report  = 'PHP SDK (Haque\Cybersource\CybersourceSDK) Debug Report:' . PHP_EOL;
+        $report  = 'PHP SDK (Incevio\Cybersource\CybersourceSDK) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 2.0.0' . PHP_EOL;
-       
+
 
         return $report;
     }
@@ -663,7 +663,7 @@ class MerchantConfiguration
         //var_dump($connectionDet);die;
         if(is_bool($connectionDet->enableLog)){
             $config = $config->setDebug($connectionDet->enableLog);
-            
+
         }
         else if(empty($connectionDet->enableLog)){
             $config = $config->setDebug(true);
@@ -698,7 +698,7 @@ class MerchantConfiguration
             $config = $config->setMerchantID($connectionDet->merchantID);
         else
             $error_message .= GlobalParameter::MERCID;
-            
+
         if(isset($connectionDet->merchantKeyId))
             $config = $config->setApiKeyID($connectionDet->merchantKeyId);
         else
@@ -736,7 +736,7 @@ class MerchantConfiguration
 
         if(isset($connectionDet->solutionId))
             $config = $config->setSolutionId($connectionDet->solutionId);
-       
+
         $config->validateMerchantData($config);
         if($error_message != null){
             $error_message = GlobalParameter::NOT_ENTERED. $error_message;
@@ -752,7 +752,7 @@ class MerchantConfiguration
 
     public function validateMerchantData($config)
     {
-       
+
         $error_message = "";
         $warning_message = "";
         if(empty($config->getMerchantID())){
@@ -770,7 +770,7 @@ class MerchantConfiguration
 
         if(!is_bool($config->getDebug())){
             $warning_message .= GlobalParameter::REFER_LOG;
-            
+
         }
 
         if($config->getDebug() == true && empty($config->getDebugFile()))
@@ -780,7 +780,7 @@ class MerchantConfiguration
                 $config = $config->setDebugFile(GlobalParameter::DEFAULT_LOG_DIR);
             }
 
-            
+
         }else if($config->getDebug() == true && !empty($config->getDebugFile())){
             if(empty($config->getLogFileName())){
                 $warning_message .= GlobalParameter::KEY_LOG_FILE_NULL.GlobalParameter::DEFAULT_LOG_FILE;
@@ -792,7 +792,7 @@ class MerchantConfiguration
                 $config = $config->setDebugFile(GlobalParameter::DEFAULT_LOG_DIR);
              }
         }
-        
+
         if($config->getDebug() == true && empty($config->getLogSize()))
         {
 
@@ -841,10 +841,10 @@ class MerchantConfiguration
         }
         if($warning_message != ""){
             trigger_error($warning_message, E_USER_WARNING);
-            self::$logger->log($config, $warning_message); 
+            self::$logger->log($config, $warning_message);
         }
         return $config;
-        
+
     }
 
 

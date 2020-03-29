@@ -17,16 +17,16 @@ These instructions will get you a copy of the project up and running on your loc
 ## Installation
 
 ```
-composer require haque/cybersource-wrapper
+composer require incevio/cybersource-wrapper
 ```
 
 ### If you use laravel < 5.5 you must add this to config\app.php
 ```
  Providers Array
-   Haque\Cybersource\Providers\CybersourceServiceProvider::class
+   Incevio\Cybersource\Providers\CybersourceServiceProvider::class
 
  Facade Array
-   "CybersourcePayments" => Haque\Cybersource\Facades\CybersourcePaymentsFacade::class
+   "CybersourcePayments" => Incevio\Cybersource\Facades\CybersourcePaymentsFacade::class
 
 ```
 

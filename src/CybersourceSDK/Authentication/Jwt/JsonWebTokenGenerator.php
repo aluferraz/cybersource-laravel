@@ -1,14 +1,14 @@
 <?php
 /*
-*Purpose : calling the JWtoken 
+*Purpose : calling the JWtoken
 */
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Jwt;
-use Haque\Cybersource\CybersourceSDK\Authentication\PayloadDigest\PayloadDigest as PayloadDigest;
-use Haque\Cybersource\CybersourceSDK\Authentication\Core\TokenGenerator as TokenGenerator;
-use Haque\Cybersource\CybersourceSDK\Authentication\Core\AuthException as AuthException;
-use Haque\Cybersource\CybersourceSDK\Authentication\Jwt\JsonWebTokenHeader as JsonWebTokenHeader;
-use Haque\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
-use Haque\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Jwt;
+use Incevio\Cybersource\CybersourceSDK\Authentication\PayloadDigest\PayloadDigest as PayloadDigest;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Core\TokenGenerator as TokenGenerator;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Core\AuthException as AuthException;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Jwt\JsonWebTokenHeader as JsonWebTokenHeader;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
 
 //calling the interface
 class JsonWebTokenGenerator implements TokenGenerator
@@ -31,15 +31,15 @@ class JsonWebTokenGenerator implements TokenGenerator
 		if($method==GlobalParameter::GET || $method==GlobalParameter::DELETE)
 		{
 			$jwtBody = array("iat"=>$date);
-			
-		} 
+
+		}
 		else if($method==GlobalParameter::POST || $method==GlobalParameter::PUT || $method==GlobalParameter::PATCH)
 		{
 			$digestObj = new PayloadDigest();
-			$digest = $digestObj->generateDigest($payloadData);	
+			$digest = $digestObj->generateDigest($payloadData);
 			$jwtBody = array("digest"=>$digest,"digestAlgorithm"=>"SHA-256","iat"=>$date);
-			
-		} 
+
+		}
 		else
 		{
 			$exception = new AuthException(GlobalParameter::INVALID_REQUEST_TYPE_METHOD, 0);
@@ -48,18 +48,18 @@ class JsonWebTokenGenerator implements TokenGenerator
 		}
 		$tokenHeader = $this->accessTokenHeader($jwtBody, $merchantConfig);
 		return $tokenHeader;
-				
+
 	}
 
 	public function accessTokenHeader($jwtBody, $merchantConfig){
 			$gToken = $this->getJsonWebTokenHeader();
-			$generatedToken = $gToken->getJsonWebToken($jwtBody, $merchantConfig); 
+			$generatedToken = $gToken->getJsonWebToken($jwtBody, $merchantConfig);
 			return "Bearer ".$generatedToken;
 	}
 
 	protected function getJsonWebTokenHeader() {
 		return new JsonWebTokenHeader();
-	} 
+	}
 
 }
 ?>

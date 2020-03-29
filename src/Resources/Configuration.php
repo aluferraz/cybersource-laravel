@@ -2,7 +2,7 @@
 /*
 * Purpose : passing merchant config object to the configuration
 */
-namespace Haque\Cybersource\Resources;
+namespace Incevio\Cybersource\Resources;
 
 // require_once 'autoload.php';
 // require_once __DIR__ . DIRECTORY_SEPARATOR . '../vendor/cybersource/rest-client-php/lib/Authentication/Core/MerchantConfiguration.php';
@@ -31,8 +31,8 @@ class Configuration
         }
         //creating merchant config object
 	function merchantConfigObject()
-	{     
-		$config = new \Haque\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration;
+	{
+		$config = new \Incevio\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration;
                 if(is_bool($this->enableLog))
 		      $confiData = $config->setDebug($this->enableLog);
 
@@ -53,6 +53,6 @@ class Configuration
                 $config->validateMerchantData($confiData);
 		return $config;
 	}
-}	
+}
 
 ?>

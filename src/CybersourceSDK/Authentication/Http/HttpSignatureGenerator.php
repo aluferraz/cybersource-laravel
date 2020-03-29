@@ -2,13 +2,13 @@
 /*
 *Purpose : Generating token for HTTP Signature
 */
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Http;
-use Haque\Cybersource\CybersourceSDK\Authentication\PayloadDigest\PayloadDigest as PayloadDigest;
-use Haque\Cybersource\CybersourceSDK\Authentication\Core\TokenGenerator as TokenGenerator;
-use Haque\Cybersource\CybersourceSDK\Authentication\Core\AuthException as AuthException;
-use Haque\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
-use Haque\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
- 
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Http;
+use Incevio\Cybersource\CybersourceSDK\Authentication\PayloadDigest\PayloadDigest as PayloadDigest;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Core\TokenGenerator as TokenGenerator;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Core\AuthException as AuthException;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
+
 class HttpSignatureGenerator implements TokenGenerator
 {
 	private static $logger=null;
@@ -23,17 +23,17 @@ class HttpSignatureGenerator implements TokenGenerator
     }
 
 	//Signature Creation function
-	public function generateToken($resourcePath, $payloadData, $method, $merchantConfig) //add 
+	public function generateToken($resourcePath, $payloadData, $method, $merchantConfig) //add
 	{
 		$host = $merchantConfig->getHost();
 		$date = date("D, d M Y G:i:s ").GlobalParameter::GMT;
 		$methodHeader = strtolower($method);
 		$signatureString ="";
-		if($method==GlobalParameter::GET || $method==GlobalParameter::DELETE){		
+		if($method==GlobalParameter::GET || $method==GlobalParameter::DELETE){
 			//signature creation for GET/DELETE
 			$signatureString = "host: ".$host."\ndate: ".$date."\n(request-target): ".$methodHeader." ".$resourcePath."\nv-c-merchant-id: ".$merchantConfig->getMerchantID();
-			$headerString = GlobalParameter::GETALGOHEADER;	
-			
+			$headerString = GlobalParameter::GETALGOHEADER;
+
 		} else if($method==GlobalParameter::POST || $method==GlobalParameter::PUT || $method==GlobalParameter::PATCH){
 			//signature creation for POST/PUT
 			if(empty($payloadData)){
@@ -46,7 +46,7 @@ class HttpSignatureGenerator implements TokenGenerator
 	    	$digest = $digestCon->generateDigest($payloadData);
 			$signatureString = "host: ".$host."\ndate: ".$date."\n(request-target): ".$methodHeader." ".$resourcePath."\ndigest: ".GlobalParameter::SHA256DIGEST.$digest."\nv-c-merchant-id: ".$merchantConfig->getMerchantID();
 			$headerString = GlobalParameter::POSTALGOHEADER;
-			
+
 		}
 		else
 		{
@@ -61,7 +61,7 @@ class HttpSignatureGenerator implements TokenGenerator
 
 		$signatureByteString = utf8_encode($signatureString);
 		$decodeKey = base64_decode($merchantConfig->getSecretKey());
-		$signature = base64_encode(hash_hmac(GlobalParameter::SHA256, $signatureByteString, $decodeKey, true));	
+		$signature = base64_encode(hash_hmac(GlobalParameter::SHA256, $signatureByteString, $decodeKey, true));
 		$signatureHeader = array(
 			'keyid="'.$merchantConfig->getApiKeyID().'"',
 			'algorithm="'.GlobalParameter::HMACSHA256.'"',
@@ -71,7 +71,7 @@ class HttpSignatureGenerator implements TokenGenerator
 		return GlobalParameter::SIGNATURE.implode(", ",$signatureHeader);
 	}
 
-	
+
 
 }
 ?>

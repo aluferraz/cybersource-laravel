@@ -1,4 +1,4 @@
-[2020-03-28 18:10:18] [Haque\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration] [INFO] authenticationType =>JWT
+[2020-03-28 18:10:18] [Incevio\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration] [INFO] authenticationType =>JWT
 [DEBUG] HTTP Request body  ~BEGIN~
 {"clientReferenceInformation":{"code":"test_payment"},"processingInformation":{"capture":true,"commerceIndicator":"internet"},"paymentInformation":{"card":{"number":"4111111111111111","expirationMonth":"12","expirationYear":"2031","securityCode":"123"}},"orderInformation":{"amountDetails":{"totalAmount":"102.21","currency":"USD"},"billTo":{"firstName":"John","lastName":"Doe","company":"ABC Company","address1":"1 Market St","locality":"san francisco","administrativeArea":"CA","postalCode":"94105","country":"US","email":"test@cybs.com","phoneNumber":"4158880000"}}}
 ~END~
@@ -38,7 +38,7 @@ Content-Length: 569
 < x-response-time: 424ms
 < Strict-Transport-Security: max-age=31536000
 < v-c-correlation-id: a7a00b07-b40e-4941-8633-9027d3f9e873
-< 
+<
 * Connection #0 to host apitest.cybersource.com left intact
 [DEBUG] HTTP Response body ~BEGIN~
 {"_links":{"void":{"method":"POST","href":"/pts/v2/payments/5854154197426437103005/voids"},"authReversal":{"method":"POST","href":"/pts/v2/payments/5854154197426437103005/reversals"},"self":{"method":"GET","href":"/pts/v2/payments/5854154197426437103005"},"capture":{"method":"POST","href":"/pts/v2/payments/5854154197426437103005/captures"},"refund":{"method":"POST","href":"/pts/v2/payments/5854154197426437103005/refunds"}},"clientReferenceInformation":{"code":"test_payment"},"id":"5854154197426437103005","orderInformation":{"amountDetails":{"totalAmount":"102.21","authorizedAmount":"102.21","currency":"USD"}},"paymentAccountInformation":{"card":{"type":"001"}},"paymentInformation":{"tokenizedCard":{"type":"001"}},"processorInformation":{"approvalCode":"888888","responseCode":"100","avs":{"code":"X","codeRaw":"I1"}},"reconciliationId":"71964474W88QUN7Q","status":"AUTHORIZED","submitTimeUtc":"2020-03-28T17:10:20Z"}

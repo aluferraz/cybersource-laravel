@@ -2,7 +2,7 @@
 /*
 * Purpose : passing Authentication config object to the configuration
 */
-namespace Haque\Cybersource\Resources;
+namespace Incevio\Cybersource\Resources;
 
 // require_once __DIR__. DIRECTORY_SEPARATOR .'../vendor/autoload.php';
 
@@ -37,11 +37,11 @@ class ExternalConfiguration
         $this->runEnv = $this->getConfig("runEnv", "cyberSource.environment.SANDBOX");
         $this->merchantConfigObject();
     }
-        
+
     //creating merchant config object
     function merchantConfigObject()
-    {     
-        $config = new \Haque\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration();
+    {
+        $config = new \Incevio\Cybersource\CybersourceSDK\Authentication\Core\MerchantConfiguration();
         if(is_bool($this->enableLog))
               $confiData = $config->setDebug($this->enableLog);
 
@@ -64,7 +64,7 @@ class ExternalConfiguration
     function ConnectionHost()
     {
         $merchantConfig = $this->merchantConfigObject();
-        $config = new \Haque\Cybersource\CybersourceSDK\Configuration;
+        $config = new \Incevio\Cybersource\CybersourceSDK\Configuration;
         $config = $config->setHost($merchantConfig->getHost());
         $config = $config->setDebug($merchantConfig->getDebug());
         $config = $config->setDebugFile($merchantConfig->getDebugFile() . DIRECTORY_SEPARATOR . $merchantConfig->getLogFileName());

@@ -1,4 +1,4 @@
-<?php namespace Haque\Cybersource\Facades;
+<?php namespace Incevio\Cybersource\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -1,7 +1,7 @@
-<?php namespace Haque\Cybersource\Providers;
+<?php namespace Incevio\Cybersource\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Haque\Cybersource\Services\CybersourcePaymentsService;
+use Incevio\Cybersource\Services\CybersourcePaymentsService;
 
 class CybersourceServiceProvider extends ServiceProvider
 {

@@ -1,14 +1,14 @@
 <?php
 /*
-Purpose : This is focusly on split the services HTTP or JWT 
+Purpose : This is focusly on split the services HTTP or JWT
 */
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Core;
-use Haque\Cybersource\CybersourceSDK\Authentication\Http\HttpSignatureGenerator as HttpSignatureGenerator;
-use Haque\Cybersource\CybersourceSDK\Authentication\Jwt\JsonWebTokenGenerator as JsonWebTokenGenerator;
-use Haque\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
-use Haque\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Core;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Http\HttpSignatureGenerator as HttpSignatureGenerator;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Jwt\JsonWebTokenGenerator as JsonWebTokenGenerator;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter as GlobalParameter;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Log\Logger as Logger;
 
-class Authentication 
+class Authentication
 {
 	private static $logger=null;
 	/**
@@ -23,16 +23,16 @@ class Authentication
 
 	//call http signature and jwt
 	function generateToken($resourcePath, $inputData, $method, $merchantConfig)
-	{  
+	{
 		if(is_null($merchantConfig))
 		{
 			$exception = new AuthException(GlobalParameter::MERCHANTCONFIGERR, 0);
 			self::$logger->log($merchantConfig, $exception);
 			throw $exception;
 		}
-	
+
 		$tokenGenerator = $this->getTokenGenerator($merchantConfig);
-		return $tokenGenerator->generateToken($resourcePath, $inputData, $method, $merchantConfig);		
+		return $tokenGenerator->generateToken($resourcePath, $inputData, $method, $merchantConfig);
 	}
 
 	function getTokenGenerator($merchantConfig) {
@@ -47,7 +47,7 @@ class Authentication
 			throw $exception;
 		}
 	}
-	
+
 }
 
 

@@ -1,5 +1,5 @@
 {
-    "name": "haque/cybersource-wrapper",
+    "name": "incevio/cybersource-wrapper",
     "description": "This is a simple cybersource wrapper",
     "license": "MIT",
     "authors": [
@@ -15,16 +15,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Haque\\Cybersource\\": "src/"
+            "Incevio\\Cybersource\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Haque\\Cybersource\\Providers\\CybersourceServiceProvider"
+                "Incevio\\Cybersource\\Providers\\CybersourceServiceProvider"
             ],
             "aliases": {
-                "CybersourcePayments": "Haque\\Cybersource\\Facades\\CybersourcePaymentsFacade"
+                "CybersourcePayments": "Incevio\\Cybersource\\Facades\\CybersourcePaymentsFacade"
             }
         }
     },

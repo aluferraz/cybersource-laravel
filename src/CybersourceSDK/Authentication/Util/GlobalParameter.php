@@ -1,5 +1,5 @@
 <?php
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Util;
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Util;
 
 class GlobalParameter
 {
@@ -9,13 +9,13 @@ class GlobalParameter
 	const DELETE = "DELETE";
 	const PATCH = "PATCH";
 	const HEAD = "HEAD";
-	const OPTIONS = "OPTIONS";	
-	const HTTP_SIGNATURE ="HTTP_SIGNATURE"; 
+	const OPTIONS = "OPTIONS";
+	const HTTP_SIGNATURE ="HTTP_SIGNATURE";
 	const JWT ="JWT";
 	const GMT ="GMT";
-	const HMACSHA256 = "HmacSHA256"; 
+	const HMACSHA256 = "HmacSHA256";
 	const DEFAULT_LOG_FILE = "Cybs.log";
-	const DEFAULT_LOG_DIR = "Log"; 
+	const DEFAULT_LOG_DIR = "Log";
 	const DEFAULT_LOG_FILE_SIZE = "1048576";
 	const SHA256 = "sha256";
 	const SHA256DIGEST = "SHA-256=";
@@ -29,7 +29,7 @@ class GlobalParameter
 	const BOARUNENVIRONMENT = "bankofamerica.environment.SANDBOX";
 	const BOARUNPRODENVIRONMENT = "bankofamerica.environment.PRODUCTION";
 	const KEY_DIR_PATH_DEFAULT = "Resources/";
-	const HTTPS_PREFIX = "https://"; 
+	const HTTPS_PREFIX = "https://";
 	const SIGNATURE = "Signature:";
 	const POSTALGOHEADER = "host date (request-target) digest v-c-merchant-id";
 	const GETALGOHEADER = "host date (request-target) v-c-merchant-id";
@@ -80,7 +80,7 @@ class GlobalParameter
 	const KEYPWDFIELD = "KeyPassword ";
 	const KEYDIRFIELD = "keysDirectory ";
 	const PROXYURLFIELD = "proxyUrl ";
-	const PROXYPORTFIELD = "proxyPort "; 
+	const PROXYPORTFIELD = "proxyPort ";
 	const KEYFILEFIELD = "KeyFilename ";
 	const LOGFILENAME = "LogFilename ";
 	const REQTYPE = "RequestType ";

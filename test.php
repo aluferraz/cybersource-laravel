@@ -1,7 +1,7 @@
-<?php 
+<?php
 require_once './vendor/autoload.php';
 
-use Haque\Cybersource\Resources\ExternalConfiguration;
+use Incevio\Cybersource\Resources\ExternalConfiguration;
 
 function dp($data)
 {
@@ -24,7 +24,7 @@ function ProcessPayment($flag)
 	];
 
     $client_reference_information = new \CyberSource\Model\Ptsv2paymentsClientReferenceInformation($cliRefInfoArr);
-	
+
     if ($flag == "true") {
     	$processingInformationArr = [
 			"capture" => true, "commerceIndicator" => "internet"
@@ -43,7 +43,7 @@ function ProcessPayment($flag)
 	];
 
     $amountDetInfo = new \CyberSource\Model\Ptsv2paymentsOrderInformationAmountDetails($amountDetailsArr);
-	
+
     $billtoArr = [
 		"firstName" => "John",
 		"lastName" => "Doe",
@@ -57,13 +57,13 @@ function ProcessPayment($flag)
 		"email" => "test@cybs.com"
 	];
     $billto = new \CyberSource\Model\Ptsv2paymentsOrderInformationBillTo($billtoArr);
-	
+
     $orderInfoArr = [
-		"amountDetails" => $amountDetInfo, 
+		"amountDetails" => $amountDetInfo,
 		"billTo" => $billto
 	];
     $order_information = new \CyberSource\Model\Ptsv2paymentsOrderInformation($orderInfoArr);
-	
+
     $paymentCardInfo = [
 		"expirationYear" => "2031",
 		"number" => "4111111111111111",
@@ -71,22 +71,22 @@ function ProcessPayment($flag)
 		"expirationMonth" => "12"
 	];
     $card = new \CyberSource\Model\Ptsv2paymentsPaymentInformationCard($paymentCardInfo);
-	
+
     $paymentInfoArr = [
 		"card" => $card
     ];
     $payment_information = new \CyberSource\Model\Ptsv2paymentsPaymentInformation($paymentInfoArr);
 
     $paymentRequestArr = [
-		"clientReferenceInformation" => $client_reference_information, 
-		"orderInformation" => $order_information, 
-		"paymentInformation" => $payment_information, 
+		"clientReferenceInformation" => $client_reference_information,
+		"orderInformation" => $order_information,
+		"paymentInformation" => $payment_information,
 		"processingInformation" => $processingInformation
 	];
     $paymentRequest = new \CyberSource\Model\CreatePaymentRequest($paymentRequestArr);
-	
+
     $api_response = list($response, $statusCode, $httpHeader) = null;
-	
+
     try
     {
         //Calling the Api

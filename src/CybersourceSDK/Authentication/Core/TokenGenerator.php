@@ -1,6 +1,6 @@
 <?php
 
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Core;
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Core;
 
 interface TokenGenerator
 {

@@ -1,20 +1,20 @@
 <?php
-namespace Haque\Cybersource\CybersourceSDK\Authentication\Log;
-use Haque\Cybersource\CybersourceSDK\Authentication\Core\AuthException;
-use Haque\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter;
+namespace Incevio\Cybersource\CybersourceSDK\Authentication\Log;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Core\AuthException;
+use Incevio\Cybersource\CybersourceSDK\Authentication\Util\GlobalParameter;
 /*
 Log Logic has Finding , creating and roating log file.
 log file size : 5MB
 */
-class Logger 
+class Logger
  {
-    
+
     private $className;
-    
+
     public function __construct($className) {
         $this->className = $className;
     }
-    
+
     //Search the log file, if not create the file.
     public function initLogFile($merchantConfig) {
 
@@ -22,11 +22,11 @@ class Logger
         $logSize = $merchantConfig->getLogSize();
         $fileName = $merchantConfig->getLogFileName();
         $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
-        if (!file_exists($filePath)) 
-        {         
+        if (!file_exists($filePath))
+        {
             if(!is_dir($path)){
                 mkdir($path, 0777, true);
-            } 
+            }
             fopen($filePath, "w");
         }
         $this->rotateLogFile($path, $fileName, $logSize);
@@ -44,7 +44,7 @@ class Logger
                 rename($filePath, $updateOldFile);
             }
             fopen($filePath, "w");
-            
+
         }
     }
 
@@ -62,7 +62,7 @@ class Logger
             {
                 error_log("[".$date."] [".$this->className."] [INFO] MERCHCFG:".print_r($message, true).PHP_EOL, 3, $filePath);
             }
-            else 
+            else
             {
                 error_log("[".$date."] [".$this->className."] [INFO] ".$message.PHP_EOL, 3, $filePath);
             }

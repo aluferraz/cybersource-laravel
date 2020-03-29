@@ -1,18 +1,18 @@
-<?php 
-namespace Haque\Cybersource\Services;
+<?php
+namespace Incevio\Cybersource\Services;
 
-use Haque\Cybersource\Resources\ExternalConfiguration;
+use Incevio\Cybersource\Resources\ExternalConfiguration;
 
-use Haque\Cybersource\CybersourceSDK\ApiClient;
-use Haque\Cybersource\CybersourceSDK\Api\PaymentsApi;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsClientReferenceInformation;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsProcessingInformation;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsOrderInformationAmountDetails;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsOrderInformationBillTo;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsOrderInformation;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsPaymentInformationCard;
-use Haque\Cybersource\CybersourceSDK\Model\Ptsv2paymentsPaymentInformation;
-use Haque\Cybersource\CybersourceSDK\Model\CreatePaymentRequest;
+use Incevio\Cybersource\CybersourceSDK\ApiClient;
+use Incevio\Cybersource\CybersourceSDK\Api\PaymentsApi;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsClientReferenceInformation;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsProcessingInformation;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsOrderInformationAmountDetails;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsOrderInformationBillTo;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsOrderInformation;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsPaymentInformationCard;
+use Incevio\Cybersource\CybersourceSDK\Model\Ptsv2paymentsPaymentInformation;
+use Incevio\Cybersource\CybersourceSDK\Model\CreatePaymentRequest;
 
 class CybersourcePaymentsService
 {
@@ -35,20 +35,20 @@ class CybersourcePaymentsService
 	    $config = $commonElement->ConnectionHost();
 		$merchantConfig = $commonElement->merchantConfigObject();
 		$apiclient = new ApiClient($config, $merchantConfig);
-		
+
 	    $api_instance = new PaymentsApi($apiclient);
 
 	    $client_reference_information = new Ptsv2paymentsClientReferenceInformation($cliRefInfoArr);
 	    $processingInformation = new Ptsv2paymentsProcessingInformation($this->getProcessingInformation($flag));
 	    $amountDetInfo = new Ptsv2paymentsOrderInformationAmountDetails($amountDetailsArr);
 	    $billto = new Ptsv2paymentsOrderInformationBillTo($billtoArr);
-		
+
 	    $orderInfoArr = [
-			"amountDetails" => $amountDetInfo, 
+			"amountDetails" => $amountDetInfo,
 			"billTo"        => $billto
 		];
 	    $order_information = new Ptsv2paymentsOrderInformation($orderInfoArr);
-	    
+
 	    $card = new Ptsv2paymentsPaymentInformationCard($paymentCardInfo);
 	    $paymentInfoArr = [
 			"card" => $card
@@ -56,15 +56,15 @@ class CybersourcePaymentsService
 	    $payment_information = new Ptsv2paymentsPaymentInformation($paymentInfoArr);
 
 	    $paymentRequestArr = [
-			"clientReferenceInformation" => $client_reference_information, 
-			"orderInformation"           => $order_information, 
-			"paymentInformation"         => $payment_information, 
+			"clientReferenceInformation" => $client_reference_information,
+			"orderInformation"           => $order_information,
+			"paymentInformation"         => $payment_information,
 			"processingInformation"      => $processingInformation
 		];
 	    $paymentRequest = new CreatePaymentRequest($paymentRequestArr);
-		
+
 	    $api_response = list($response, $statusCode, $httpHeader) = null;
-		
+
 	    try {
 	        $api_response = $api_instance->createPayment($paymentRequest);
 
