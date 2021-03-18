@@ -10,8 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "firebase/php-jwt": "5.0.0",
-        "illuminate/support": "^5"
+        "firebase/php-jwt": "*",
+        "illuminate/support": "*"
     },
     "autoload": {
         "psr-4": {
